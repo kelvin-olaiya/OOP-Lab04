@@ -19,6 +19,7 @@ public abstract class AbstractBankAccount implements BankAccount {
 		double feeAmount = this.computeFee();
 		if (this.checkUser(usrID) && this.isWithDrawAllowed(feeAmount)) {
 			this.balanceOperation(-feeAmount);
+			this.resetNTransaction();
 		}
 	}
 
@@ -62,6 +63,10 @@ public abstract class AbstractBankAccount implements BankAccount {
     	this.incNTransaction();
     	this.balance += amount;
     }
+    
+    private void resetNTransaction() {
+		this.nTrasactions = 0;
+	}
     
     protected void incNTransaction() {
     	this.nTrasactions++;
